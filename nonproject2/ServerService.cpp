@@ -48,6 +48,7 @@ void ServerService::start(const std::string& host, int port) {
 
     try {
         configureSocket(host, port);
+        socket.setNonBlocking();
         socket.listen(10);  // 10 é o backlog de conexões
         server.setRunning(true);
         std::cout << "Servidor iniciado e aguardando conexões..." << std::endl;

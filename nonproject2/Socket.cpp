@@ -50,8 +50,9 @@ void Socket::close() {
         ::close(socketFD);
     }
 }
-
+#include <iostream>
 void Socket::setNonBlocking() {
+    std::cout << "socket fd " << socketFD <<std:: endl; 
     int flags = fcntl(socketFD, F_GETFL, 0);
     if (flags == -1) {
         throw std::runtime_error("Erro ao obter flags do socket");

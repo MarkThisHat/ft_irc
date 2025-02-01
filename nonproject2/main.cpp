@@ -3,7 +3,7 @@
 #include "ServerService.hpp"
 #include "Socket.hpp"
 #include "Poller.hpp"
-#include "Multiplexer.hpp"
+// #include "Multiplexer.hpp"
 
 
 
@@ -13,26 +13,26 @@ int main() {
     Server server;
     Socket socket;
     ServerService serverService(server, socket);
-    
+
     // Configurar o servidor e começar a escutar
     serverService.start("127.0.0.1", 6667);
     
     // Criar e configurar o Multiplexer
-    Multiplexer multiplexer;
-    multiplexer.start();
+    Poller poller;
+    // poller.start();
 
-    // Adicionar o socket do servidor ao multiplexer
-    multiplexer.addSocket(socket.getSocket(), EPOLLIN);  // POLLIN significa que estamos interessados em leitura
+    // Adicionar o socket do servidor ao poller
+    poller.addSocket(socket.getSocket(), EPOLLIN);  // POLLIN significa que estamos interessados em leitura
     
     // Simular o loop do servidor
     while (true) {
         // Verifica e lida com os eventos
-        multiplexer.handleEvents();
+        poller.pollSockets();
     }
 
     // Parar o servidor
     serverService.stop();
-    multiplexer.stop();
+    // poller.stop();
     
     return 0;
 }

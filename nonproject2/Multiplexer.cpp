@@ -30,14 +30,14 @@ void Multiplexer::removeSocket(int socketFD) {
 }
 
 bool Multiplexer::isRunning() const {
-    if (!running)
+    if (!running)//marcos: eu tiraria o throw
         std::cerr << "Multiplexer não está em execução!" << std::endl;
     return running;
 }
 
 void Multiplexer::processPollResult(int ret) {
     if (ret < 0) {
-        throw std::runtime_error("Erro ao executar epoll_wait");
+        throw std::runtime_error("Erro ao executar epoll_wait no processPollResult");
     } else if (ret == 0) {
         std::cout << "Nenhum evento ocorrido no tempo de espera" << std::endl;
     }
