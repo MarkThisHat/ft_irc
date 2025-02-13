@@ -4,6 +4,7 @@
 # define SIGNALMANAGER_HPP
 
 #include <csignal>
+#include <cstring>
 #include <stdexcept>
 
 class SignalManager {
