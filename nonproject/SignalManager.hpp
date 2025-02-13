@@ -1,0 +1,19 @@
+#pragma once
+
+#ifndef SIGNALMANAGER_HPP
+# define SIGNALMANAGER_HPP
+
+#include <csignal>
+#include <stdexcept>
+
+class SignalManager {
+    private:
+        static bool* _running;
+
+        static void signalHandler(int signum);
+
+    public:
+        static void initialize(bool* running);
+};
+
+#endif
