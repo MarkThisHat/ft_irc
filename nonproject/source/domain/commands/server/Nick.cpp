@@ -17,7 +17,7 @@ void    Nick::execute(Client* client, std::vector<std::string> args) {
         return;
 
     std::string nickname = args[0];
-
+    std::cout << "client nickname" << args[0] << std::endl;
     if (_is_nickname_taken(nickname, client))
         return;
 

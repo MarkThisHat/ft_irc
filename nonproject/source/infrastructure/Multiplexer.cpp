@@ -140,8 +140,10 @@ void Multiplexer::handle_events(int total_events, CommandHandler* handler) {
             if ((_events[i].events & (EPOLLHUP | EPOLLERR)))
                 disconnect_client(_events[i].data.fd);
 
-            if (_events[i].events & EPOLLIN)
+            if (_events[i].events & EPOLLIN) {
+                std::cout << "\033[36mentering handle client\033[0m" << std::endl;
                 handle_client(_events[i].data.fd, handler);
+            }
 
         }
     }
@@ -186,7 +188,7 @@ void Multiplexer::handle_client(int client_fd, CommandHandler* handler) {
     try {
         Client*     client = _clients.at(client_fd);
         std::string message = read_client_message(client_fd);
-        
+        std::cout << "client with fd " << client_fd << " sent message \n" << message << std::endl;
         handler->handle_command(client, message);
     } catch (const std::exception& e) {
         std::cout << "Error while handling the client message! " << e.what() << std::endl;
