@@ -34,7 +34,7 @@ bool Nick::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "NICK::Validate parameters..." << std::endl;
     if (args.size() == 1)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "NICK"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "NICK"));
     return false;
 }
 
@@ -42,7 +42,7 @@ bool Nick::_is_nickname_taken(const std::string& nickname, Client* client) {
     std::cout << "NICK::Validate if nickname is already in use..." << std::endl;
     if (!_server->get_client(nickname))
         return false;
-    ClientService::reply_message(client, ERR_NICKNAMEINUSE(client->get_nickname()));
+    ClientService::send_message(client, ERR_NICKNAMEINUSE(client->get_nickname()));
     return true;
 }
 

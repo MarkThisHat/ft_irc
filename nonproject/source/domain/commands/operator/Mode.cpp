@@ -18,7 +18,7 @@ void Mode::execute(Client* client, std::vector<std::string> args) {
 
     std::string channel_name = args[0];
     if (channel_name.at(0) != '#') {
-        ClientService::reply_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
+        ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
         return;
     }
     channel_name.erase(0,1);
@@ -45,7 +45,7 @@ bool Mode::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "MODE::Validate parameters..." << std::endl;
     if (args.size() > 1)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "MODE"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "MODE"));
     return false;
 }
 
@@ -121,13 +121,13 @@ void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::
     for (size_t i = 2; i < args.size(); ++i) {
         Client* dest = _server->get_client(args[i]);
         if (!dest) {
-            ClientService::reply_message(client, ERR_NOSUCHNICK(client->get_nickname(), dest->get_nickname()));
+            ClientService::send_message(client, ERR_NOSUCHNICK(client->get_nickname(), dest->get_nickname()));
             continue;
         }
 
         std::set<Client*> channel_clients = channel->get_clients();
         if (channel_clients.find(dest) == channel_clients.end()) {
-            ClientService::reply_message(client, ERR_NOTONCHANNEL(client->get_nickname(), dest->get_nickname()));
+            ClientService::send_message(client, ERR_NOTONCHANNEL(client->get_nickname(), dest->get_nickname()));
             continue;
         }
 

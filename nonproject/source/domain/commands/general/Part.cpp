@@ -18,7 +18,7 @@ void    Part::execute(Client* client, std::vector<std::string> args) {
 
     std::string channel_name = args[0];
     if (channel_name.at(0) != '#') {
-        ClientService::reply_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
+        ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
         return;
     }
     channel_name.erase(0,1);
@@ -39,7 +39,7 @@ bool Part::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "PART::Validate parameters..." << std::endl;
     if (args.size() > 0)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "PART"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "PART"));
     return false;
 }
 
@@ -48,6 +48,6 @@ bool Part::_is_client_in_channel(Client* client, Channel* channel, const std::st
     if (channel && client->get_channel() && client->get_channel()->get_name() == name)
         return true;
 
-    ClientService::reply_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), name));
+    ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), name));
     return false;
 }

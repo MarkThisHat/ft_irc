@@ -248,6 +248,7 @@ std::string Multiplexer::read_client_message(int client_fd) {
 }
 
 void Multiplexer::send_client_message(int client_fd, const std::string& message) {
+    std::cout << "client fd " << client_fd << " \033[33mis being messaged:\033[0m " << message << std::endl;
     std::string buffer = message + "\r\n";
     if (send(client_fd, buffer.c_str(), buffer.length(), 0) == -1)
         throw std::runtime_error("Error while sending a message to a client!");

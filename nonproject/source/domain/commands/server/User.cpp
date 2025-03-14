@@ -16,9 +16,17 @@ void    User::execute(Client* client, std::vector<std::string> args) {
     if (!_has_valid_parameters(client, args))
         return;
 
+std::cout << client->get_fd() << " has " << args.size() << " arguments and";
+std::cout << " \033[35mexecute with client has arg0\033[0m " <<  args[0];
+std::cout << " \033[35mexecute with client has arg1\033[0m " <<  args[1];
+std::cout << " \033[35mexecute with client has arg2\033[0m " <<  args[2];
+std::cout << " \033[35mexecute with client has arg3\033[0m " <<  args[3] << std::endl;
+
     if (_is_already_registered(client))
         return;
 
+    
+    
     client->set_realname(_get_realname(args));
     client->set_username(args[0]);
 
@@ -33,7 +41,7 @@ bool User::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "USER::Validate parameters..." << std::endl;
     if (args.size() > 3)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "USER"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "USER"));
     return false;
 }
 

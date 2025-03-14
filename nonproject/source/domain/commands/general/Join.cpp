@@ -90,7 +90,7 @@ bool Join::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "JOIN::Validate parameters..." << std::endl;
     if (args.size() == 1 || args.size() == 2)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "JOIN"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "JOIN"));
     return false;
 }
 
@@ -98,14 +98,14 @@ bool Join::_is_already_in_channel(Client* client) {
     std::cout << "JOIN::Validate if is already in channel..." << std::endl;
     if (client->get_channel() == NULL)
         return false;
-    ClientService::reply_message(client, ERR_TOOMANYCHANNELS(client->get_nickname(), client->get_channel()->get_name()));
+    ClientService::send_message(client, ERR_TOOMANYCHANNELS(client->get_nickname(), client->get_channel()->get_name()));
     return true;
 }
 
 bool Join::_is_channel_full(Channel* channel, Client* client, const std::string& name) {
     std::cout << "JOIN::Validate if channel is full..." << std::endl;
     if (channel->get_limit().first && ChannelService::get_total_clients(channel) >= channel->get_limit().second) {
-        ClientService::reply_message(client, ERR_CHANNELISFULL(client->get_nickname(), name));
+        ClientService::send_message(client, ERR_CHANNELISFULL(client->get_nickname(), name));
         return true;
     }
     return false;
@@ -115,7 +115,7 @@ bool Join::_is_channel_key_valid(Channel* channel, Client* client, const std::st
     std::cout << "JOIN::Validate if key correct..." << std::endl;
     if (!channel->get_key().first || (channel->get_key().first && channel->get_key().second == pass))
         return true;
-    ClientService::reply_message(client, ERR_BADCHANNELKEY(client->get_nickname(), name));
+    ClientService::send_message(client, ERR_BADCHANNELKEY(client->get_nickname(), name));
     return false;
 }
 
@@ -123,6 +123,6 @@ bool Join::_is_invited(Channel* channel, Client* client, const std::string& name
     std::cout << "JOIN::Validate if client is invited..." << std::endl;
     if (!channel->get_inviteds().first || (channel->get_inviteds().first && channel->get_invited(client)))
         return true;
-    ClientService::reply_message(client, ERR_INVITEONLYCHAN(client->get_nickname(), name));
+    ClientService::send_message(client, ERR_INVITEONLYCHAN(client->get_nickname(), name));
     return false;
 }

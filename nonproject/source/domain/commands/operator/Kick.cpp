@@ -20,7 +20,7 @@ void Kick::execute(Client* client, std::vector<std::string> args) {
     std::string reason = _extract_reason(args);
     std::string channel_name = args[0];
     if (channel_name.at(0) != '#') {
-        ClientService::reply_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
+        ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
         return;
     }
     channel_name.erase(0,1);
@@ -49,7 +49,7 @@ bool Kick::_has_valid_parameters(Client* client, const std::vector<std::string>&
     std::cout << "KICK::Validate parameters..." << std::endl;
     if (args.size() > 1)
         return true;
-    ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "KICK"));
+    ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "KICK"));
     return false;
 }
 

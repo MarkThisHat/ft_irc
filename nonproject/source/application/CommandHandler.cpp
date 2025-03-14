@@ -6,6 +6,9 @@
 #include "ClientService.hpp"
 #include "Server.hpp"
 
+# include "commands/server/Cap.hpp"
+# include "commands/server/Ping.hpp"
+# include "commands/server/Pong.hpp"
 # include "commands/server/Pass.hpp"
 # include "commands/server/Nick.hpp"
 # include "commands/server/User.hpp"
@@ -25,6 +28,9 @@ CommandHandler::CommandHandler(Server* server) : _server(server) {
     _commands["NICK"] = new Nick(_server);
     _commands["USER"] = new User(_server);
     _commands["QUIT"] = new Quit(_server);
+    _commands["CAP"] = new Cap(_server);
+    _commands["PING"] = new Ping(_server);
+    _commands["PONG"] = new Pong(_server);
 
     // General
     _commands["JOIN"] = new Join(_server);
@@ -69,7 +75,6 @@ void CommandHandler::handle_command(Client* client, const std::string& message) 
         syntax = _trim(syntax);
 
         std::string name = syntax.substr(0, syntax.find(' '));
-
         try {
             std::vector<std::string>    args;
             std::stringstream           line(syntax.substr(name.length(), syntax.length()));
@@ -81,13 +86,12 @@ void CommandHandler::handle_command(Client* client, const std::string& message) 
                 args.push_back(buf);
 
             if (client->get_state() != REGISTERED && cmd->auth_required()) {
-                ClientService::reply_message(client, ERR_NOTREGISTERED(client->get_nickname()));
+                ClientService::send_message(client, ERR_NOTREGISTERED(client->get_nickname()));
                 return;
             }
-
             cmd->execute(client, args);
         } catch (const std::exception& e) {
-            ClientService::reply_message(client, ERR_UNKNOWNCOMMAND(client->get_nickname(), name));
+            ClientService::send_message(client, ERR_UNKNOWNCOMMAND(client->get_nickname(), name));
         }
     }
 }

@@ -19,7 +19,7 @@ void Topic::execute(Client* client, std::vector<std::string> args) {
 
     std::string channel_name = args[0];
     if (channel_name.at(0) != '#') {
-        ClientService::reply_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
+        ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
         return;
     }
     channel_name.erase(0,1);
@@ -47,14 +47,14 @@ void Topic::execute(Client* client, std::vector<std::string> args) {
 bool Topic::_has_valid_parameters(Client* client, const std::vector<std::string>& args) {
     std::cout << "TOPIC::Validate parameters..." << std::endl;
     if (args.empty()) {
-        ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "TOPIC"));
+        ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "TOPIC"));
         return false;
     }
     return true;
 }
 
 void Topic::_send_current_topic(Client* client, Channel* channel) {
-    ClientService::reply_message(client, RPL_TOPIC(client->get_prefix(), channel->get_name(), channel->get_topic().second));
+    ClientService::send_message(client, RPL_TOPIC(client->get_prefix(), channel->get_name(), channel->get_topic().second));
 }
 
 void Topic::_set_new_topic(Client* client, Channel* channel, const std::vector<std::string>& args) {

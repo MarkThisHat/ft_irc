@@ -34,11 +34,11 @@
 
 /* General Responses */
 
-# define RPL_WELCOME(source, client)                     /*001*/  source + " :Welcome " + client + " to the ft_irc network"
-# define RPL_CREATED(source, datetime)                   /*003*/  source + " :This server was created " + datetime
-# define RPL_MYINFO(source)                              /*004*/  source + " ft_irc 1.0 itkol"
-# define RPL_NAMREPLY(source, channel, users)            /*353*/  source + " = " + channel + " :" + users
-# define RPL_ENDOFNAMES(source, channel)                 /*366*/  source + " " + channel + " :End of /NAMES list."
+# define RPL_WELCOME(source, client)                     /*001*/  "001 " + source + " :Welcome " + client + " to the ft_irc network"
+# define RPL_CREATED(source, datetime)                   /*003*/  "003 " + source + " :This server was created " + datetime
+# define RPL_MYINFO(source)                              /*004*/  "004 " + source + " ft_irc 1.0 itkol"
+# define RPL_NAMREPLY(source, channel, users)            /*353*/  "353 " + source + " = " + channel + " :" + users
+# define RPL_ENDOFNAMES(source, channel)                 /*366*/  "366 " + source + " " + channel + " :End of /NAMES list."
 
 
 /* Command Responses */

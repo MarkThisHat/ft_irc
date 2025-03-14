@@ -58,12 +58,12 @@ void PrivMsg::_handle_client_message(Client* client, const std::string& target, 
 
     Client* dest = _server->get_client(target);
     if (!dest) {
-        ClientService::reply_message(client, ERR_NOSUCHNICK(client->get_nickname(), target));
+        ClientService::send_message(client, ERR_NOSUCHNICK(client->get_nickname(), target));
         return;
     }
 
     if (dest->get_channel() != channel) {
-        ClientService::reply_message(client, ERR_NOTONCHANNEL(client->get_nickname(), target));
+        ClientService::send_message(client, ERR_NOTONCHANNEL(client->get_nickname(), target));
         return;
     }
 
@@ -77,7 +77,7 @@ void PrivMsg::_handle_client_message(Client* client, const std::string& target, 
 bool PrivMsg::_has_valid_parameters(Client* client, const std::vector<std::string>& args) {
     std::cout << "PRIVMSG::Validate parameters..." << std::endl;
     if (args.size() < 2 || args[0].empty() || args[1].empty()) {
-        ClientService::reply_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "PRIVMSG"));
+        ClientService::send_message(client, ERR_NEEDMOREPARAMS(client->get_nickname(), "PRIVMSG"));
         return false;
     }
     return true;
