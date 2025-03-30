@@ -1,0 +1,272 @@
+docker inspect kind_kapitsa
+[
+    {
+        "Id": "6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a",
+        "Created": "2025-03-30T17:40:43.152247851Z",
+        "Path": "weechat",
+        "Args": [
+            "-r",
+            "/server add bst 172.17.0.1/6667 -password=123456 -notls; /set irc.server_default.nicks batata,batata2,batata3,batata4,batata5"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 1542132,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2025-03-30T17:40:43.274527231Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:38c1d6d7708599fed3ca93809d92f5a53a34d095b886eaa614baa81852595fbf",
+        "ResolvConfPath": "/goinfre/maalexan/docker/containers/6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a/resolv.conf",
+        "HostnamePath": "/goinfre/maalexan/docker/containers/6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a/hostname",
+        "HostsPath": "/goinfre/maalexan/docker/containers/6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a/hosts",
+        "LogPath": "/goinfre/maalexan/docker/containers/6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a/6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a-json.log",
+        "Name": "/kind_kapitsa",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "bridge",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": true,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                24,
+                100
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "ID": "6367e7b64e8e99f03752b41bf7e1a45628a38e0be528d82b50558f6e7d17614a",
+                "LowerDir": "/goinfre/maalexan/docker/overlay2/c6467a3200fa581861931497b5749b21186d8a4320b5ae55d3cdae8b438f9ce4-init/diff:/goinfre/maalexan/docker/overlay2/kboz9nureikuv0xymm7kikl3y/diff:/goinfre/maalexan/docker/overlay2/365db10ad641da93f87bbd98d150ed259570d87281873b107e74cb80922eca0b/diff",
+                "MergedDir": "/goinfre/maalexan/docker/overlay2/c6467a3200fa581861931497b5749b21186d8a4320b5ae55d3cdae8b438f9ce4/merged",
+                "UpperDir": "/goinfre/maalexan/docker/overlay2/c6467a3200fa581861931497b5749b21186d8a4320b5ae55d3cdae8b438f9ce4/diff",
+                "WorkDir": "/goinfre/maalexan/docker/overlay2/c6467a3200fa581861931497b5749b21186d8a4320b5ae55d3cdae8b438f9ce4/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "6367e7b64e8e",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": true,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "weechat",
+                "-r",
+                "/server add bst 172.17.0.1/6667 -password=123456 -notls; /set irc.server_default.nicks batata,batata2,batata3,batata4,batata5"
+            ],
+            "Image": "irc-client",
+            "Volumes": null,
+            "WorkingDir": "/",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "e34260079328e0c616f99f2088bb814e6ec7be5dbfb0045334b5112c7acef98d",
+            "SandboxKey": "/run/user/1426880/docker/netns/e34260079328",
+            "Ports": {},
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "3eb46e9aff9d230dbc99c653f6cee262b077114a477af493f79c6e3a12512758",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "da:55:ff:e2:13:b5",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "da:55:ff:e2:13:b5",
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "d8d5b2bb3809e559f69ef0fd7363a3cb2ae76e34bf8cd672e417ac323515b196",
+                    "EndpointID": "3eb46e9aff9d230dbc99c653f6cee262b077114a477af493f79c6e3a12512758",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]
+
+
+
+
+/**\
+argh
+ip route show
+default via 10.12.254.254 dev enp0s31f6 proto dhcp src 10.12.10.6 metric 100 
+10.12.0.0/16 dev enp0s31f6 proto kernel scope link src 10.12.10.6 metric 100 
+10.12.254.254 dev enp0s31f6 proto dhcp scope link src 10.12.10.6 metric 100 
+10.51.1.253 via 10.12.254.254 dev enp0s31f6 proto dhcp src 10.12.10.6 metric 100 
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown 
+192.168.122.0/24 dev virbr0 proto kernel scope link src 192.168.122.1 linkdown 
+
+command: docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+d8d5b2bb3809   bridge    bridge    local
+cdbce2500abf   host      host      local
+dddbd3fa6aab   none      null      local
+
+command: docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "d8d5b2bb3809e559f69ef0fd7363a3cb2ae76e34bf8cd672e417ac323515b196",
+        "Created": "2025-03-30T14:17:34.664766395-03:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv4": true,
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "89e215dd98d16d933f90f2551fa01afa5742edf322b6e8b36f5f719aaa797a7f": {
+                "Name": "elastic_hertz",
+                "EndpointID": "cc9d1c0b50c537ffc2f4aa0111ea354cb302f64fd15ed4868f95e9fd44797aa6",
+                "MacAddress": "92:2e:37:30:21:ab",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+
