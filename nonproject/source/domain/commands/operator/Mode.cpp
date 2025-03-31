@@ -31,7 +31,7 @@ void Mode::execute(Client* client, std::vector<std::string> args) {
         return;
 
     std::string flag = args[1];
-    if (flag.at(0) != '+' && flag.at(1) != '-')
+    if (flag.at(0) != '+' && flag.at(0) != '-')
         return;
 
     _process_modes(client, args, channel);
@@ -58,9 +58,8 @@ bool Mode::_has_valid_parameters(Client* client, const std::vector<std::string>&
 void Mode::_process_modes(Client* client, std::vector<std::string> args, Channel* channel) {
     std::cout << "MODE::Parsing modes..." << std::endl;
     std::string target = args[1];
-    if ((target.at(0) != '+' && target.at(1) != '-') || target.length() != 2)
+    if (/*(target.at(0) != '+' && target.at(0) != '-') || */target.length() != 2)
         return;
-
     bool enable_mode = (target.at(0) == '+') ? true : false;
     char flag = target.at(1);
 
