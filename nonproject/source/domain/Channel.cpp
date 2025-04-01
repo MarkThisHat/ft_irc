@@ -75,7 +75,7 @@ void Channel::add_to_black_list(Client* client) {
 }
 
 std::string Channel::get_active_modes() {
-    std::string modes = "+";
+    std::string modes = "+n";
 
     if (_topic.first)
         modes += "t";

@@ -38,8 +38,7 @@ void PrivMsg::_handle_channel_message(Client* client, std::string& channel_name,
     if (!_is_valid_channel(client, channel, channel_name))
         return;
 
-    Channel* client_channel = client->get_channel();
-    if (!_is_on_channel(client, client_channel))
+    if (!_is_on_channel(client, channel))
         return;
 
     ChannelService::broadcast(channel, RPL_PRIVMSG(client->get_info(), channel_name, message), client);

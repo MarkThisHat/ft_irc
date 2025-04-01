@@ -56,7 +56,8 @@ std::string Kick::_extract_reason(const std::vector<std::string>& args) {
     std::string reason = "";
     for (size_t i = 2; i < args.size(); ++i) {
         reason.append(args[i]);
-        reason.append(" ");
+        if (i != args.size() - 1)
+            reason.append(" ");
     }
     return reason;
 }

@@ -44,8 +44,8 @@ void ClientService::_broadcast_join_message(Client* client, Channel* channel) {
 }
 
 void ClientService::_broadcast_part_message(Client* client, Channel* channel) {
-    ClientService::send_message(client, RPL_PART(client->get_nickname(), client->get_info(), channel->get_name()));
-    ChannelService::broadcast(channel, RPL_PART(client->get_nickname(), client->get_info(), channel->get_name()));
+    ClientService::send_message(client, RPL_PART(client->get_nickname(), channel->get_name()));
+    ChannelService::broadcast(channel, RPL_PART(client->get_nickname(), channel->get_name()));
 }
 
 

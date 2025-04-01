@@ -134,7 +134,7 @@ void Join::_send_client_list(Channel* channel, Client* client) {
     for (std::set<Client*>::iterator it = clients.begin(); it != clients.end(); ++it) {
         user_info += (*it)->get_nickname() + " ";
     }
-    //channel->set_topic(true, "FLARGBUGS are awesome", "josephine");
+
     CommandFactory::execute_command(_server, client, "TOPIC " + channel->get_name());
     CommandFactory::execute_command(_server, client, "WHO " + channel->get_name());
     CommandFactory::execute_command(_server, client, "NAMES " + channel->get_name());

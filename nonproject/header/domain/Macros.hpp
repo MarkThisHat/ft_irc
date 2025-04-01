@@ -76,11 +76,11 @@
 # define RPL_PING(client, token)                            ":" + client + " PONG :" + token
 */
 # define RPL_JOIN(client, channel)                        ":" + client + " JOIN " + channel
-# define RPL_PART(client, channel, reason)                ":" + client + " PART " + channel + reason
+# define RPL_PART(client, channel)                        ":" + client + " PART " + channel /*+ " :" + reason*/
 # define RPL_PRIVMSG(client, target, message)             ":" + client + " PRIVMSG " + target + " :" + message
 # define RPL_QUIT(client, message)                        ":" + client + " QUIT" + message
 # define RPL_KICK(client, channel, target, reason)        ":" + client + " KICK " + channel + " " + target + " :" + reason
-# define RPL_MODE(client, channel, modes, args)            ":" + client + " MODE " + channel + " " + modes + " " + args
+# define RPL_MODE(client, channel, modes, args)           ":" + client + " MODE " + channel + " " + modes + " " + args
 # define RPL_NICK(old_nick, new_nick)                     ":" + old_nick + " NICK " + new_nick
 # define RPL_NOTICE(client, target, message)              ":" + client + " NOTICE " + target + " :" + message
 # define RPL_PING(token)                                  "PONG :ft_irc :" + token
@@ -95,7 +95,7 @@
 */
 # define MESSAGE_CLIENT_JOIN(channel, client)                 client + " joined " + channel
 # define MESSAGE_CLIENT_LEAVE(channel, client)                client + " left " + channel
-# define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " kicked " + target + " from " + channel + " (reason: " + reason + ")"
+# define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " kicked " + target + " from " + channel + " " + reason
 # define MESSAGE_ADMIN_CHANGE(channel, client)                client + " is now an operator in " + channel
 
 
