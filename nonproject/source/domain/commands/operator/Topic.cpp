@@ -75,7 +75,8 @@ std::string Topic::_extract_topic(const std::vector<std::string>& args) {
     if (args.size() >= 2 && (args[1][0] != ':' || args[1].size() > 1)) {
         for (size_t i = 1; i < args.size(); ++i) {
             topic.append(args[i]);
-            topic.append(" ");
+            if (i != args.size() - 1)
+                topic.append(" ");
         }
     }
     return topic;

@@ -38,8 +38,8 @@ std::string Names::_get_client_info(Channel* channel) {
     std::set<Client*> clients = channel->get_clients();
     std::string user_info;
     for (std::set<Client*>::iterator it = clients.begin(); it != clients.end(); ++it) {
-        Client* target = channel->get_operator(*it);
-        user_info += _get_prefix(target, channel) + (*it)->get_nickname() + " ";
+//        Client* target = channel->get_operator(*it);
+        user_info += _get_prefix(*it, channel) + (*it)->get_nickname() + " ";
     }
     return user_info;
 }

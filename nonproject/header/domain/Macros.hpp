@@ -18,7 +18,7 @@
 # define RPL_CHANNELMODEIS(recipient, channel, modes, args)         "324 " + recipient + " " + channel + " " + modes + " " + args
 
 # define RPL_NOTOPIC(recipient, channel)                            "331 " + recipient + " " + channel + " :No topic is set"
-# define RPL_TOPIC(recipient, channel, topic)                       "332 " + recipient + " " + channel + " :" + topic
+# define RPL_TOPIC(recipient, channel, topic)                       "332 " + recipient + " " + channel + " " + topic
 # define RPL_TOPICWHOTIME(recipient, channel, nick, datetime)       "333 " + recipient + " " + channel + " " + nick + " " + datetime
 
 # define RPL_INVITING(recipient, nick, channel)                     "341 " + recipient + " " + nick + " " + channel
