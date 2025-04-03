@@ -40,13 +40,13 @@ void ChannelService::remove_client(Channel* channel, Client* client) {
 
 void ChannelService::kick_client(Channel* channel, Client* client, Client* target, const std::string& reason) {
     std::cout << "ChannelService::Kicking client..." << std::endl;
+    _announce_client_kick(channel, client, target, reason);
     channel->add_to_black_list(target);
     channel->remove_from_clients(target);
     channel->remove_from_guests(target);
     channel->remove_from_operators(target);
     remove_client(channel, target);
 
-    _announce_client_kick(channel, client, target, reason);
     std::cout << "ChannelService::Client kicked." << std::endl;
 }
 

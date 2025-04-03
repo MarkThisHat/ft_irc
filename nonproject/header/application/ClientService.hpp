@@ -26,6 +26,7 @@ class ClientService {
 
         static void         join_channel(Client* client, Channel* channel);
         static void         leave_channel(Client* client, Channel* channel);
+        static void         kicked_from_channel(Client* client, Client* target, Channel* channel, std::string reason);
 };
 
 #endif // CLIENT_ACTION_MANAGER_HPP

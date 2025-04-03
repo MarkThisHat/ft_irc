@@ -32,6 +32,14 @@ void ClientService::leave_channel(Client* client, Channel* channel) {
     std::cout << "ClientService::Client left." << std::endl;
 }
 
+void ClientService::kicked_from_channel(Client* client, Client* target, Channel* channel, std::string reason) {
+    std::cout << "ClientService::Kicking from channel..." << std::endl;
+    (void)client;
+    (void)reason;
+    (void)channel;
+    _update_client_channel(target, NULL);
+    std::cout << "ClientService::Client kicked." << std::endl;
+}
 
 // Funções auxiliares
 

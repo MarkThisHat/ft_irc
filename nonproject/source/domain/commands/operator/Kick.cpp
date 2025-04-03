@@ -33,7 +33,7 @@ void Kick::execute(Client* client, std::vector<std::string> args) {
 
     std::cout << "KICK::Kicking client..." << std::endl;
     ChannelService::kick_client(channel, client, target_client, reason);
-    ClientService::leave_channel(target_client, channel);
+    ClientService::kicked_from_channel(client, target_client, channel, reason);
     std::cout << "SUCCEDED KICK" << std::endl;
 }
 
@@ -51,7 +51,7 @@ bool Kick::_has_valid_parameters(Client* client, const std::vector<std::string>&
 std::string Kick::_extract_reason(const std::vector<std::string>& args) {
     std::cout << "KICK::Extracting reason..." << std::endl;
     if (!(args.size() >= 3 && (args[2][0] != ':' || args[2].size() > 1)))
-        return "No reason specified!";
+        return "";
 
     std::string reason = "";
     for (size_t i = 2; i < args.size(); ++i) {
