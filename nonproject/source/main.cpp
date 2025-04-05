@@ -18,7 +18,13 @@ int main(int ac, char** av) {
     // Injeções de dependência
     const std::string   IP_ADDRESS      = "0.0.0.0";
     IVault*             vault           = new Vault(password);
-    ISocket*            server_socket   = new Socket(IP_ADDRESS, port);
+    ISocket*            server_socket;
+    try {
+        server_socket   = new Socket(IP_ADDRESS, port);
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+        return -1;
+    }
     IMultiplexer*       multiplexer     = new Multiplexer(server_socket->get_fd());
 
     Server      server(vault, server_socket, multiplexer);
