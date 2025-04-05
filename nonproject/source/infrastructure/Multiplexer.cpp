@@ -57,6 +57,7 @@ Client*                     Multiplexer::get_client(std::string target) {
 void Multiplexer::subscribe_fd_for_monitoring(int fd) {
     epoll_event event;
 
+    bzero(&event, sizeof(epoll_event));
     event.events = EPOLLIN | EPOLLOUT | EPOLLERR | EPOLLHUP;
     event.data.fd = fd;
     if (epoll_ctl(_epoll_fd, EPOLL_CTL_ADD, fd, &event) == -1)
