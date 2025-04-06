@@ -99,7 +99,7 @@ void ChannelService::_change_admin_if_needed(Channel* channel, Client* client) {
             Client* new_admin = *operators.begin();
             channel->set_admin(new_admin);
             channel->remove_from_operators(new_admin);
-//            _announce_admin_change(channel, new_admin);
+            _announce_admin_change(channel, new_admin);
             return;
         }
     }
@@ -110,7 +110,7 @@ void ChannelService::_change_admin_if_needed(Channel* channel, Client* client) {
         std::set<Client*>::iterator it = clients.begin();
         Client* new_admin = *it;
         channel->set_admin(new_admin);
-//        _announce_admin_change(channel, new_admin);
+        _announce_admin_change(channel, new_admin);
         return;
     }
 
@@ -132,14 +132,18 @@ void ChannelService::_announce_client_leave(Channel* channel, Client* client) {
     std::string channel_name = channel->get_name();
     broadcast(channel, announcer + MESSAGE_CLIENT_LEAVE(channel_name, nickname_client));
 }
+*/
 
 void ChannelService::_announce_admin_change(Channel* channel, Client* client) {
-    std::string announcer = "NOTICE ";
     std::string nickname_client = client->get_nickname();
     std::string channel_name = channel->get_name();
-    broadcast(channel, announcer + MESSAGE_ADMIN_CHANGE(channel_name, nickname_client));
+
+    std::set<Client*>& clients = channel->get_clients();
+    for (std::set<Client*>::iterator it = clients.begin(); it != clients.end(); ++it) {
+        ClientService::send_message(*it, MESSAGE_ADMIN_CHANGE((*it)->get_nickname(), channel_name, nickname_client));
+    }
 }
-*/
+
 void ChannelService::_announce_client_kick(Channel* channel, Client* client, Client* target, const std::string& reason) {
     std::string announcer = ":";
     std::string nickname_client = client->get_nickname();

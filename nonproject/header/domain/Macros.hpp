@@ -10,7 +10,7 @@
 # define RPL_YOURHOST(recipient,server)                             "002 " + recipient + " :Your host is " + server + ", running version 1.0"
 # define RPL_CREATED(recipient,datetime)                            "003 " + recipient + " :This server was created " + datetime
 # define RPL_MYINFO(recipient,server)                               "004 " + recipient + " " + server + " 1.0 itkol"
-# define RPL_ISUPPORT(recipient)                                    "005 " + recipient + " PREFIX=(qohv)~@%+ CHANMODES=itkol MAXCHANNELS=1 :are supported by this server"
+# define RPL_ISUPPORT(recipient)                                    "005 " + recipient + " PREFIX=(qo)~@ CHANMODES=itkol MAXCHANNELS=1 :are supported by this server"
 
 # define RPL_LISTSTART(recipient)                                   "321 " + recipient + " Channel :Users Name"
 # define RPL_LIST(recipient, channel, clientcount, topic)           "322 " + recipient + " " + channel + " " + clientcount + " :" + topic
@@ -97,8 +97,8 @@
 # define MESSAGE_ADMIN_CHANGE(channel, client)                   client + " is now the admin of the channel " + channel
 # define MESSAGE_CLIENT_JOIN(channel, client)                 client + " joined " + channel
 # define MESSAGE_CLIENT_LEAVE(channel, client)                client + " left " + channel
-# define MESSAGE_ADMIN_CHANGE(channel, client)                client + " is now an admin in " + channel
 */
+# define MESSAGE_ADMIN_CHANGE(recipient, channel, client)     ":" + recipient + " MODE " + channel + " +q " + client
 # define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " KICK " + channel + " " + target + " " + reason
 
 #endif // MACROS_HPP
