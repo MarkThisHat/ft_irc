@@ -16,11 +16,13 @@ Topic::~Topic() {}
 void Topic::execute(Client* client, std::vector<std::string> args) {
     if (!_has_valid_parameters(client, args))
         return;
+
     std::string channel_name = args[0];
     if (channel_name.at(0) != '#') {
         ClientService::send_message(client, ERR_NOSUCHCHANNEL(client->get_nickname(), channel_name));
         return;
     }
+
     Channel* channel = _server->get_channel(channel_name);
     if (!_is_valid_channel(client, channel, channel_name))
         return;
@@ -31,15 +33,15 @@ void Topic::execute(Client* client, std::vector<std::string> args) {
         return;
     }
 
-    if (!_has_channel_privileges(client, channel))
+    if (!_is_on_channel(client, channel))
+        return;
+
+    if (channel->get_topic().first && !_has_channel_privileges(client, channel))
         return;
     
     _set_new_topic(client, channel, args);
     std::cout << "SUCCEDED TOPIC" << std::endl;
 }
-
-
-// Funções auxiliares
 
 bool Topic::_has_valid_parameters(Client* client, const std::vector<std::string>& args) {
     std::cout << "TOPIC::Validate parameters..." << std::endl;
