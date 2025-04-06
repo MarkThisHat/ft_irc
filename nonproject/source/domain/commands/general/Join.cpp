@@ -3,6 +3,7 @@
 #include "Client.hpp"
 #include "ClientService.hpp"
 #include "ChannelService.hpp"
+#include "CommandHandler.hpp"
 #include "Macros.hpp"
 #include "Server.hpp"
 #include "CommandFactory.hpp"
@@ -135,7 +136,13 @@ void Join::_send_client_list(Channel* channel, Client* client) {
         user_info += (*it)->get_nickname() + " ";
     }
 
-    CommandFactory::execute_command(_server, client, "TOPIC " + channel->get_name());
-    CommandFactory::execute_command(_server, client, "WHO " + channel->get_name());
-    CommandFactory::execute_command(_server, client, "NAMES " + channel->get_name());
+    CommandHandler* handler = _server->get_command_handler();
+    handler->handle_command(client, "TOPIC " + channel->get_name());
+    handler->handle_command(client, "WHO " + channel->get_name());
+    handler->handle_command(client, "NAMES " + channel->get_name());
+
+    
+    // CommandFactory::execute_command(_server, client, "TOPIC " + channel->get_name());
+    // CommandFactory::execute_command(_server, client, "WHO " + channel->get_name());
+    // CommandFactory::execute_command(_server, client, "NAMES " + channel->get_name());
 }

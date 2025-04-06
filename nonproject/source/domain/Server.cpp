@@ -38,6 +38,7 @@ Server::~Server() {
 // Getters
 
 IMultiplexer*                   Server::get_multiplexer() const { return _multiplexer; }
+CommandHandler*                 Server::get_command_handler() const { return _command_handler; }
 const std::set<Channel*>&       Server::get_channels() const { return _channels; }
 const std::map<int, Client*>&   Server::get_clients() const { return _multiplexer->get_clients(); }
 const std::string&              Server::get_datetime() const { return _datetime; }

@@ -32,6 +32,7 @@ class Server {
 
         // Getters
         IMultiplexer*                   get_multiplexer() const;
+        CommandHandler*                 get_command_handler() const;
 
         const std::set<Channel*>&       get_channels() const;
         Channel*                        get_channel(const std::string& name);
