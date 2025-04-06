@@ -60,6 +60,7 @@
 # define ERR_INVITEONLYCHAN(recipient, channel)             "473 " + recipient + " " + channel + " :Cannot join channel (+i)"
 # define ERR_BANNEDFROMCHAN(recipient, channel)             "474 " + recipient + " " + channel + " :Cannot join channel (+b)"
 # define ERR_BADCHANNELKEY(recipient, channel)              "475 " + recipient + " " + channel + " :Cannot join channel (+k)"
+# define ERR_NOPRIVILEGES(recipient, channel)               "481 " + recipient + " " + channel + " :You're not an administrator"
 # define ERR_CHANOPRIVSNEEDED(recipient, channel)           "482 " + recipient + " " + channel + " :You're not channel operator"
 
 

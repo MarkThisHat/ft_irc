@@ -31,6 +31,9 @@ void Kick::execute(Client* client, std::vector<std::string> args) {
     if (!_has_channel_privileges(client, channel))
         return;
 
+    if (_kicking_admin(client, channel, target_client))
+        return;
+
     std::cout << "KICK::Kicking client..." << std::endl;
     ChannelService::kick_client(channel, client, target_client, reason);
     ClientService::kicked_from_channel(client, target_client, channel, reason);
@@ -60,4 +63,13 @@ std::string Kick::_extract_reason(const std::vector<std::string>& args) {
             reason.append(" ");
     }
     return reason;
+}
+
+bool    Kick::_kicking_admin(Client* client, Channel* channel, Client* target_client) {
+    if (channel->get_admin() != target_client)
+        return false;
+
+    ClientService::send_message(client, ERR_NOPRIVILEGES(client->get_nickname(), channel->get_name()));
+    return true;
+
 }

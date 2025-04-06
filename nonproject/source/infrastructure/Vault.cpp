@@ -3,7 +3,7 @@
 
 Vault::Vault(const std::string& password) {
     if (!_is_valid_password(password))
-        throw std::invalid_argument("Invalid password.");
+        throw std::invalid_argument("Invalid password");
 
     std::string encrypted = password;
     for (size_t i = 0; i < password.length(); ++i)
