@@ -83,6 +83,7 @@ void ACommand::_set_registered(Client* client) {
     ClientService::send_message(client, RPL_YOURHOST(nickname, server));
     ClientService::send_message(client, RPL_CREATED(nickname, _server->get_datetime()));
     ClientService::send_message(client, RPL_MYINFO(nickname, client->get_nickname()));
+    ClientService::send_message(client, RPL_ISUPPORT(nickname));
 }
 
 std::string ACommand::_get_prefix(Client* client, Channel* channel) {

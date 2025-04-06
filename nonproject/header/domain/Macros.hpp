@@ -10,6 +10,7 @@
 # define RPL_YOURHOST(recipient,server)                             "002 " + recipient + " :Your host is " + server + ", running version 1.0"
 # define RPL_CREATED(recipient,datetime)                            "003 " + recipient + " :This server was created " + datetime
 # define RPL_MYINFO(recipient,server)                               "004 " + recipient + " " + server + " 1.0 itkol"
+# define RPL_ISUPPORT(recipient)                                    "005 " + recipient + " PREFIX=(qohv)~@%+ CHANMODES=itkol MAXCHANNELS=1 :are supported by this server"
 
 # define RPL_LISTSTART(recipient)                                   "321 " + recipient + " Channel :Users Name"
 # define RPL_LIST(recipient, channel, clientcount, topic)           "322 " + recipient + " " + channel + " " + clientcount + " :" + topic
