@@ -26,6 +26,7 @@ Multiplexer::~Multiplexer() {
     std::map<int, Client*>::iterator client_it;
     for (client_it = _clients.begin(); client_it != _clients.end(); ++client_it) {
         Client* client = client_it->second;
+        ::close(client->get_fd());
         delete client;
     }
     _clients.clear();
