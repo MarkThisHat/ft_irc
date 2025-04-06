@@ -24,6 +24,8 @@ class Multiplexer : public IMultiplexer {
         int                         _epoll_fd;
         epoll_event                 _events[MAX_EVENTS];
         std::map<int, Client*>      _clients;
+        std::map<int, std::string>  _client_buffers;
+
 
         int     _accept_connection(int server_fd, sockaddr_in* addr, socklen_t* size);
         Client* _create_client(int client_fd, const sockaddr_in& addr);

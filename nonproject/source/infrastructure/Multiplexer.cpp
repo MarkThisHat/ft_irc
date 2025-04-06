@@ -188,80 +188,73 @@ int Multiplexer::connect_client(int server_fd) {
 }
 
 
-// HANDLE CLIENTS
 void Multiplexer::handle_client(int client_fd, CommandHandler* handler) {
     try {
-        Client*     client = _clients.at(client_fd);
-        std::string message = read_client_message(client_fd);
-        
-        handler->handle_command(client, message);
+        Client* client = _clients.at(client_fd);
+        char buffer[BUFFER_SIZE];
+        bzero(buffer, BUFFER_SIZE);
+
+        ssize_t bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0);
+        if (bytes_received == 0) {
+            disconnect_client(client_fd);  // connection closed
+            return;
+        } else if (bytes_received < 0) {
+            return; // try again later
+        }
+
+        // Append new data to existing buffer
+        _client_buffers[client_fd].append(buffer, bytes_received);
+
+        // Extract full lines
+        std::string& total_buffer = _client_buffers[client_fd];
+        size_t pos;
+        while ((pos = total_buffer.find('\n')) != std::string::npos) {
+            std::string message = total_buffer.substr(0, pos + 1); // include \n
+            total_buffer.erase(0, pos + 1); // remove processed message
+            handler->handle_command(client, message);
+        }
+
     } catch (const std::exception& e) {
         std::cout << "Error while handling the client message! " << e.what() << std::endl;
     }
 }
 
+
 // MINI GNL
 std::string Multiplexer::read_client_message(int client_fd) {
     std::string message;
-    try {
-        
-        char buffer[BUFFER_SIZE];
-        bzero(buffer, BUFFER_SIZE);
+    char buffer[BUFFER_SIZE];
 
-        // Vai salvando a mensagem no buffer, e depois agrega em "message"
-        while (!strstr(buffer, "\n"))
-        {
+    try {
+        while (true) {
             bzero(buffer, BUFFER_SIZE);
 
-            /* CODIGO COMENTADO POIS EWOULDBLOCK VIOLARIA A REGRA DE USAR O ERRNO COM EQUIVALENTE AO poll()
-            if ((recv(client_fd, buffer, BUFFER_SIZE, 0) <= 0) and (errno != EWOULDBLOCK)) {
-                disconnect_client(client_fd);
-                return "";
-            }
-            */
             ssize_t bytes_received = recv(client_fd, buffer, BUFFER_SIZE, 0);
             if (bytes_received == 0) {
-                // Client has closed the connection
+                // Connection closed by the client
                 disconnect_client(client_fd);
                 return "";
             } else if (bytes_received < 0) {
-                // Just return and wait for epoll_wait() to signal readiness again
+                // Error reading
                 return "";
             }
-            
 
-            /*
-                ssize_t recv(int sockfd, void *buf, size_t len, int flags);
-                - sockfd é o fd do client de quem está vindo a mensagem.
-                - buf é o ponteiro para o buffer, o bloco de memória com os dados a 
-                    serem lidos.
-                - len é o tamanho do buffer, definido o tamanhno máximo através 
-                    da constante BUFFER_SIZE.
-                - flags permite especificar algumas opções adicionais, mas 0 significa 
-                    que nenhuma foi definida.
-                - Se retornar -1, significa erro. Se retornar 0, significa que a
-                    conexão foi encerrada por parte do client. E o valor positivo 
-                    corresponde ao número de bytes recebidos.
-            */ 
+            // Append only the bytes we actually read
+            message.append(buffer, bytes_received);
 
-            message.append(buffer);
+            // Check if a full line has been received
+            if (message.find('\n') != std::string::npos)
+                break;
         }
 
         return message;
-        // Apaga a última quebra de linha
-        // if (!message.empty() && message[message.size() - 1] == '\n')
-        //     message.erase(message.size() - 1);
-
-        // Imprime a mensagem do terminal, identificada pelo FD do usuário
-        // std::cout << client_fd << ": " << message << std::endl;
-
-        // Apenas para testar. Se o usuário escreve exit(), é removido
 
     } catch (const std::exception& e) {
         std::cout << "Error processing the message: " << e.what() << std::endl;
         return message;
     }
 }
+
 
 void Multiplexer::send_client_message(int client_fd, const std::string& message) {
     std::string buffer = message + "\r\n";

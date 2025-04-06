@@ -18,7 +18,7 @@ This project is an IRC server implementation in C++, inspired by **RFC 1459** an
     - [x] `PRIVMSG <msgtarget> :<message>`: Envia uma mensagem particular a um usuário
     - [x] `QUIT :<message>`: Desconecta-se do servidor
     - [x] `TOPIC <channel>` ou `TOPIC <channel> :<new_topic>`: Lê ou redefine o tópico de um canal
-    - [ ] `INVITE <nickname> <channel>`: Envia um invite para um canal a um usuário
+    - [x] `INVITE <nickname> <channel>`: Envia um invite para um canal a um usuário
     - [x] `KICK <channel> <client> :<message>`: Expulsa um usuário de um canal
     - [x] `MODE <nickname> <flags>` ou `MODE <channel> <flags> <args>`: Altera modos de um usuário ou canal
 
@@ -30,6 +30,8 @@ This project is an IRC server implementation in C++, inspired by **RFC 1459** an
         | o | Dar/tirar privilégios de operador de canal. |
         | l | Definir/remover o limite de usuários do canal. |
 
+
+### Command to test split up stuff `(echo -n "NI"; sleep 1; echo -n "CK "; sleep 1; echo " rulyo") | nc 127.0.0.1 6667`
 
 
 
