@@ -98,7 +98,7 @@
 # define MESSAGE_CLIENT_JOIN(channel, client)                 client + " joined " + channel
 # define MESSAGE_CLIENT_LEAVE(channel, client)                client + " left " + channel
 # define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " KICK " + channel + " " + target + " " + reason
-# define MESSAGE_ADMIN_CHANGE(channel, client)                client + " is now an operator in " + channel
+# define MESSAGE_ADMIN_CHANGE(channel, client)                client + " is now an admin in " + channel
 
 
 

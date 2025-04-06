@@ -10,9 +10,9 @@ int main(int ac, char** av) {
         std::string password    = av[2];
 
         // Injeções de dependência
-        IVault*             vault           = new Vault(password);
-        ISocket*            server_socket   = new Socket(LISTEN_ADDRESS, port);
-        IMultiplexer*       multiplexer     = new Multiplexer(server_socket->get_fd());
+        IVault*         vault           = new Vault(password);
+        ISocket*        server_socket   = new Socket(LISTEN_ADDRESS, port);
+        IMultiplexer*   multiplexer     = new Multiplexer(server_socket->get_fd());
 
         Server      server(vault, server_socket, multiplexer);
 
@@ -39,6 +39,6 @@ Se não houver saída, o servidor não está rodando ou não está escutando na 
 
 
 /* CONECTANDO AO SERVIDOR
-nc 0.0.0.1 6667
+nc 0.0.0.0 6667
 Para desconectar, necessário o uso do ctrl+C.
 */
