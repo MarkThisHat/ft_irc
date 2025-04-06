@@ -113,7 +113,7 @@ void Mode::_set_mode_k(Client* client, Channel* channel, bool enable_mode, std::
     channel->set_key(enable_mode, channel_key);
     ChannelService::broadcast(channel, RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+k" : "-k"), ""));
 }
-
+/*
 void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::vector<std::string>& args) {
     if (enable_mode && args[2].empty())
         return; //defina um ou mais operators
@@ -126,7 +126,40 @@ void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::
     for (size_t i = 2; i < args.size(); ++i) {
         Client* dest = _server->get_client(args[i]);
         if (!dest) {
-            ClientService::send_message(client, ERR_NOSUCHNICK(client->get_nickname(), dest->get_nickname()));
+            ClientService::send_message(client, ERR_NOSUCHNICK(client->get_nickname(), args[i]));
+            continue;
+        }
+
+        std::set<Client*> channel_clients = channel->get_clients();
+        if (dest && channel_clients.find(dest) == channel_clients.end()) {
+            ClientService::send_message(client, ERR_NOTONCHANNEL(client->get_nickname(), dest->get_nickname()));
+            continue;
+        }
+
+        channel->add_to_operators(dest);
+    }
+    std::string mode_args;
+    for (size_t i = 2; i < args.size(); ++i) {
+        if (!args[i].empty()) {
+            if (!mode_args.empty()) mode_args += " ";
+            mode_args += args[i];
+        }
+    }
+
+    ChannelService::broadcast(channel, RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+o" : "-o"), mode_args));
+}
+*/
+
+void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::vector<std::string>& args) {
+    if (args.size() < 3 || args[2].empty())
+        return;
+
+    std::vector<std::string> valid_targets;
+
+    for (size_t i = 2; i < args.size(); ++i) {
+        Client* dest = _server->get_client(args[i]);
+        if (!dest) {
+            ClientService::send_message(client, ERR_NOSUCHNICK(client->get_nickname(), args[i]));
             continue;
         }
 
@@ -136,7 +169,22 @@ void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::
             continue;
         }
 
-        channel->add_to_operators(dest);
+        if (enable_mode)
+            channel->add_to_operators(dest);
+        else
+            channel->remove_from_operators(dest);
+
+        valid_targets.push_back(dest->get_nickname());
     }
-    ChannelService::broadcast(channel, RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+o" : "-o"), ""));
+
+    if (!valid_targets.empty()) {
+        channel->set_operators(enable_mode);
+        std::string mode_args;
+        for (size_t i = 0; i < valid_targets.size(); ++i) {
+            if (i > 0) mode_args += " ";
+            mode_args += valid_targets[i];
+        }
+
+        ChannelService::broadcast(channel,RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+o" : "-o"), mode_args));
+    }
 }

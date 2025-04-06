@@ -95,13 +95,11 @@
 # define MESSAGE_CLIENT_LEAVE(channel, client)                   client + " left " + client + " from channel " + channel
 # define MESSAGE_CLIENT_KICK(channel, client, target, reason)    client + " kicked " + target + " from channel " + channel + " for reason: " + reason
 # define MESSAGE_ADMIN_CHANGE(channel, client)                   client + " is now the admin of the channel " + channel
-*/
 # define MESSAGE_CLIENT_JOIN(channel, client)                 client + " joined " + channel
 # define MESSAGE_CLIENT_LEAVE(channel, client)                client + " left " + channel
-# define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " KICK " + channel + " " + target + " " + reason
 # define MESSAGE_ADMIN_CHANGE(channel, client)                client + " is now an admin in " + channel
-
-
+*/
+# define MESSAGE_CLIENT_KICK(channel, client, target, reason) client + " KICK " + channel + " " + target + " " + reason
 
 #endif // MACROS_HPP
 

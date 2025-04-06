@@ -29,7 +29,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 # Run Valgrind
 val: all
-	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./$(NAME) || echo ""
+	@valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./$(NAME) 6667 123456 || echo ""
 
 # Cleanup object files
 clean:
