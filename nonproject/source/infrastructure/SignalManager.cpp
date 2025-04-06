@@ -18,7 +18,6 @@ void SignalManager::initialize(bool* running) {
     sigaction(SIGTERM, &sa, NULL);  // Termination request
     sigaction(SIGQUIT, &sa, NULL);  // Ctrl+\ (Quit)
     sigaction(SIGHUP, &sa, NULL);   // Terminal disconnect
-    sigaction(SIGTSTP, &sa, NULL);   // Terminal disconnect
 }
 
 void SignalManager::_signal_handler(int signum) {
