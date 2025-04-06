@@ -134,7 +134,7 @@ void Mode::_set_mode_k(Client* client, Channel* channel, bool enable_mode, std::
 void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::vector<std::string>& args) {
     Client* admin = channel->get_admin();
     if (client != admin) {
-        ClientService::send_message(client, ERR_CHANOPRIVSNEEDED(client->get_nickname(), channel->get_name()));
+        ClientService::send_message(client, ERR_NOPRIVILEGES(client->get_nickname(), channel->get_name()));
         return;
     }
 
@@ -166,19 +166,17 @@ void Mode::_set_mode_o(Client* client, Channel* channel, bool enable_mode, std::
         targets.insert(dest->get_nickname());
     }
 
-    if (!targets.empty()) {
-        channel->set_operators(enable_mode);
-        std::string mode_args;
+    if (!targets.empty()) {       
         for (std::set<std::string>::iterator it = targets.begin(); it != targets.end(); ++it) {
-            if (it != targets.begin())
-                mode_args += " ";
-            mode_args += *it;
+            const std::string& nick = *it;
+            ChannelService::broadcast(channel, RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+o" : "-o"), nick));
         }
-
-        ChannelService::broadcast(channel, RPL_MODE(client->get_info(), channel->get_name(), (enable_mode ? "+o" : "-o"), mode_args));
     }
+
 
     std::set<Client*> operators = channel->get_operators().second;
     if (operators.empty())
         channel->set_operators(false);
+    else
+        channel->set_operators(true);
 }
